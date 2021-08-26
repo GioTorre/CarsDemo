@@ -1,0 +1,94 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="demo.Views.AboutPage"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:vm="clr-namespace:demo.ViewModels"
+    Title="{Binding Title}">
+    <ContentPage.BindingContext>
+        <vm:AboutViewModel />
+    </ContentPage.BindingContext>
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <Color x:Key="Accent">#96d1ff</Color>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    <Grid>
+        <Grid.RowDefinitions />
+        <ScrollView>
+            <!--  this is the part set cars  -->
+            <StackLayout
+                Padding="30,24,30,24"
+                Orientation="Vertical"
+                Spacing="10">
+                <Label FontSize="Title" Text="Please add your car here" />
+                <Label
+                    Padding="0,0,0,0"
+                    FontSize="Medium"
+                    Text="Model" />
+                <Entry Text="{Binding Car.Model}" />
+                <Label
+                    Padding="0,0,0,0"
+                    FontSize="Medium"
+                    Text="Brand" />
+                <Entry Text="{Binding Car.Brand}" />
+                <Label
+                    Padding="0,0,0,0"
+                    FontSize="Medium"
+                    Text="Line" />
+                <Entry Text="{Binding Car.Line}" />
+                <Button
+                    Margin="0,10,0,0"
+                    BackgroundColor="{StaticResource Primary}"
+                    Command="{Binding AddCarCommand}"
+                    Text="{Binding NameOfButton}"
+                    TextColor="White" />
+
+
+                <!--  this is the part of the List of cars  -->
+                <ListView ItemsSource="{Binding ListCars}" SelectedItem="{Binding CarSelected, Mode=TwoWay}">
+                    <ListView.Header>
+                        <ContentView Padding="0,5" BackgroundColor="White">
+                            <Label
+                                FontSize="Large"
+                                HorizontalTextAlignment="Center"
+                                Text="List of cars"
+                                VerticalTextAlignment="Center" />
+                        </ContentView>
+                    </ListView.Header>
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <ViewCell>
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition />
+                                        <ColumnDefinition />
+                                        <ColumnDefinition />
+                                    </Grid.ColumnDefinitions>
+                                    <StackLayout
+                                        Grid.Column="0"
+                                        Padding="10"
+                                        VerticalOptions="FillAndExpand">
+                                        <Label FontSize="Medium" Text="{Binding Model, Mode=TwoWay}" />
+                                    </StackLayout>
+                                    <StackLayout
+                                        Grid.Column="1"
+                                        Padding="10"
+                                        VerticalOptions="FillAndExpand">
+                                        <Label FontSize="Medium" Text="{Binding Line, Mode=TwoWay}" />
+                                    </StackLayout>
+                                    <StackLayout
+                                        Grid.Column="2"
+                                        Padding="10"
+                                        VerticalOptions="FillAndExpand">
+                                        <Label FontSize="Medium" Text="{Binding Brand, Mode=TwoWay}" />
+                                    </StackLayout>
+                                </Grid>
+                            </ViewCell>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+            </StackLayout>
+        </ScrollView>
+    </Grid>
+</ContentPage>
